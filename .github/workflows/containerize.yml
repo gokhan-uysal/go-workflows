@@ -15,7 +15,7 @@ on:
             dockerfile-path:
                 required: false
                 type: string
-                default: "./"
+                default: "."
             dockerfile-name:
                 required: false
                 type: string
