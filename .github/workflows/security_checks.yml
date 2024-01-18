@@ -19,7 +19,7 @@ jobs:
             - name: Run GoSec
               run: gosec ./...
 
-    go-vuln-check:
+    go_vuln_check:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4

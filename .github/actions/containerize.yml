@@ -1,0 +1,33 @@
+on:
+    workflow_call:
+        inputs:
+            image-name:
+                required: true
+                type: string
+            image-args:
+                required: false
+                type: string
+                default: ""
+            dockerfile-path:
+                required: false
+                type: string
+                default: "./"
+            dockerfile-name:
+                required: false
+                type: string
+                default: "Dockerfile"
+            dockerfile-tag:
+                required: false
+                type: string
+                default: "latest"
+
+jobs:
+    build_image:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Set up QEMU
+              uses: docker/setup-qemu-action@v2
+            - name: Check docker version
+              run: docker version
+            - name: Build docker image
+              run: docker build --build-arg ${{ inputs.image-args }} -t ${{ inputs.image-name }}:${{ inputs.dockerfile-tag }} -f ${{ inputs.dockerfile-path }}/${{ inputs.dockerfile-name }} .
