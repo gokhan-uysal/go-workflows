@@ -8,6 +8,10 @@ on:
                 required: false
                 type: string
                 default: ""
+            image-tag:
+                required: false
+                type: string
+                default: "latest"
             dockerfile-path:
                 required: false
                 type: string
@@ -16,10 +20,6 @@ on:
                 required: false
                 type: string
                 default: "Dockerfile"
-            dockerfile-tag:
-                required: false
-                type: string
-                default: "latest"
 
 jobs:
     build_image:
