@@ -29,7 +29,11 @@ jobs:
               uses: docker/setup-qemu-action@v2
             - name: Check docker version
               run: docker version
-            - name: Build docker image
+            - if: inputs.image-args != ''
+              name: Build docker image with args
               run: docker build --build-arg ${{ inputs.image-args }} -t ${{ inputs.image-name }}:${{ inputs.image-tag }} -f ${{ inputs.dockerfile-path }}/${{ inputs.dockerfile-name }} .
+            - if: inputs.image-args == ''
+              name: Build docker image without args
+              run: docker build -t ${{ inputs.image-name }}:${{ inputs.image-tag }} -f ${{ inputs.dockerfile-path }}/${{ inputs.dockerfile-name }} .
             - name: Show image details
               run: docker image ls
